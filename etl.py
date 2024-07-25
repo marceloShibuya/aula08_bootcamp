@@ -1,9 +1,10 @@
-# uma funcao de extract que le e consolida os json
+# importando as bibliotecas
 import pandas as pd
 import os
 import glob
 
-def extrair_dados(caminho_pasta: str) -> pd.DataFrame:
+# uma funcao de extract que le e consolida os json
+def extrair_dados_e_consolidar(caminho_pasta: str) -> pd.DataFrame:
     # juntando todos os arquivos da pasta "data" que estão no formato json 
     arquivo_json = glob.glob(os.path.join(caminho_pasta, '*.json'))
     # percorrendo todas as linhas, inclusive os cabecalhos dos arquivos que estão no formato json
@@ -14,6 +15,9 @@ def extrair_dados(caminho_pasta: str) -> pd.DataFrame:
     return df_total
 
 # uma funcao que transforma
+def calcular_kpi_de_total_vendas(df_total: pd.DataFrame) -> pd.DataFrame:
+    df_total["Total"] = df_total["Quantidade"] * df_total["Venda"]
+    return df_total
 
 
 # uma funcao que da load em csv ou parquet
@@ -22,7 +26,10 @@ def extrair_dados(caminho_pasta: str) -> pd.DataFrame:
 
 
 
-
 if __name__ == "__main__":
     pasta = 'data'
-    print(extrair_dados(pasta))
+    tabela = extrair_dados_e_consolidar(pasta)
+    df_transformado = calcular_kpi_de_total_vendas(tabela)
+    print(df_transformado)
+
+
