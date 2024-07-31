@@ -36,11 +36,9 @@ def carregar_dados(df: pd.DataFrame, format_saida: list):
             df.to_parquet("dados.parquet") 
 
 
-if __name__ == "__main__":
-    pasta: str = 'data'
+def pipeline_consolidado(pasta, tipo_arquivo):
     tabela = extrair_dados_e_consolidar(pasta)
     df_transformado = calcular_kpi_de_total_vendas(tabela)
-    tipo_arquivo: list = ["csv","parquet"]
     carregar_dados(df_transformado, tipo_arquivo)
    
 
