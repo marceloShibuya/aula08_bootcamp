@@ -1,6 +1,6 @@
-from etl import extrair_transformar_carregar
+from etl import pipeline_consolidado
 
 pasta = 'data'
-tipo_arquivo = ['csv']
+tipo_arquivo = ['csv','parquet']
 
-extrair_transformar_carregar(pasta,tipo_arquivo)
+pipeline_consolidado(pasta,tipo_arquivo)
